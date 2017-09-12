@@ -1,5 +1,7 @@
 FROM rocker/shiny
 
+LABEL maintainer "joshua.foster@stfc.ac.uk"
+
 RUN apt-get -y update && \
     apt-get -y install libssl-dev libxml2-dev libgdal-dev libproj-dev && \
     apt-get -y autoclean
