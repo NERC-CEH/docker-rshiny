@@ -7,7 +7,8 @@ RUN apt-get -y update && \
     apt-get -y autoclean
 
 # Libraries for display
-RUN R -e "install.packages(c('DT', 'ggplot2', 'leaflet', 'shinythemes'), repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes'), repos='http://cran.rstudio.com/')" && \
+	R -q -e "devtools::install_github('idyverse/ggplot#c592e32')"
 
 # Libraries for data analysis
 RUN R -e "install.packages(c('changepoint','dplyr','lubridate','plotly','readr','ref','rgdal','rnrfa','stringr','zoo'), repos='http://cran.rstudio.com/')"
