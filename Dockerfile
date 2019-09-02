@@ -1,14 +1,24 @@
-FROM rocker/shiny
+FROM rocker/shiny:3.5.3
 
-LABEL maintainer "joshua.foster@stfc.ac.uk"
-
-RUN apt-get -y update && \
-    apt-get -y install libssl-dev libxml2-dev libgdal-dev libproj-dev && \
-    apt-get -y autoclean
+RUN apt-get update -y \
+  && apt-get install -y --no-install-recommends \
+  libcurl4-openssl-dev \
+  libxml2-dev \
+  gdal-bin \
+  libgdal-dev \
+  libproj-dev \
+  libcairo2-dev \
+  libgeos-dev \
+  libgeos++-dev \
+  libudunits2-dev \
+  libpng-dev \
+  libssl-dev \
+  libssh2-1-dev \
+  && apt-get -y autoclean
 
 # Libraries for display
-RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes'), repos='http://cran.rstudio.com/')" && \
-	R -q -e "devtools::install_github('tidyverse/ggplot2@c592e32')"
+RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes', 'ggplot2'), repos='http://cran.rstudio.com/')"
 
-# Libraries for data analysis
-RUN R -e "install.packages(c('changepoint','dplyr','lubridate','plotly','readr','ref','rgdal','rnrfa','stringr','zoo'), repos='http://cran.rstudio.com/')"
+# Add packrat to image
+RUN R -e "install.packages(c('packrat'), repos='http://cran.rstudio.com/')"
+
