@@ -14,6 +14,7 @@ RUN apt-get update -y \
   libpng-dev \
   libssl-dev \
   libssh2-1-dev \
+  jags \
   && apt-get -y autoclean
 
 # Libraries for display
