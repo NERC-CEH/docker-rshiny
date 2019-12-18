@@ -23,3 +23,5 @@ RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes', 'ggplot
 # Add packrat to image
 RUN R -e "install.packages(c('packrat'), repos='http://cran.rstudio.com/')"
 
+RUN chown shiny:shiny /var/lib/shiny-server
+USER shiny
