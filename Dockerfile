@@ -15,6 +15,7 @@ RUN apt-get update -y \
   libssl-dev \
   libssh2-1-dev \
   jags \
+  libv8-dev \
   && apt-get -y autoclean
 
 # Libraries for display
