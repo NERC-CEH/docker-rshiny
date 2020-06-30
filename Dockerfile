@@ -16,6 +16,7 @@ RUN apt-get update -y \
   libssh2-1-dev \
   jags \
   libv8-dev \
+  python3-dev \
   && apt-get -y autoclean
 
 # Libraries for display
