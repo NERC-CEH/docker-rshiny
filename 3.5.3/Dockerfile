@@ -20,8 +20,5 @@ RUN apt-get update -y \
   && apt-get -y autoclean
 
 # Libraries for display
-RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes', 'ggplot2'), repos='http://cran.rstudio.com/')"
-
-# Add packrat to image
-RUN R -e "install.packages(c('packrat'), repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes', 'ggplot2', 'packrat', 'renv'), repos='http://cran.rstudio.com/')"
 
