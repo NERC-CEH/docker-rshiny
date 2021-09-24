@@ -22,4 +22,5 @@ RUN apt-get update -y \
 # Libraries for display
 RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes', 'ggplot2', 'renv', 'packrat'), repos='http://cran.rstudio.com/')"
 
-
+# update the rshiny config with longer timeouts
+RUN sed -i 's/run_as shiny;/run_as shiny;\napp_init_timeout 1800;\napp_idle_timeout 300;/g' /opt/shiny-server/config/default.config
