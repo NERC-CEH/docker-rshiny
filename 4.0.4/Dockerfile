@@ -17,6 +17,16 @@ RUN apt-get update -y \
   jags \
   libv8-dev \
   python3-dev \
+  texlive-latex-base \
+  libsodium-dev \
+  libfreetype-dev \
+  libxext-dev \
+  lmodern \
+  texlive-latex-recommended \
+  texlive-latex-extra \
+  texlive-fonts-recommended \
+  texlive-font-utils \
+  texlive-fonts-extra \
   && apt-get -y autoclean
 
 # Libraries for display
