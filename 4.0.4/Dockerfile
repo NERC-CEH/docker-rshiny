@@ -27,10 +27,19 @@ RUN apt-get update -y \
   texlive-fonts-recommended \
   texlive-font-utils \
   texlive-fonts-extra \
+  libglpk-dev \
+  libgit2-dev \
   && apt-get -y autoclean
 
-# Libraries for display
-RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes', 'ggplot2', 'renv', 'packrat'), repos='http://cran.rstudio.com/')"
 
 # update the rshiny config with longer timeouts
 RUN sed -i 's/run_as shiny;/run_as shiny;\napp_init_timeout 1800;\napp_idle_timeout 300;/g' /opt/shiny-server/config/default.config
+
+# Libraries for display
+RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes', 'ggplot2', 'renv', 'packrat', 'webshot'), repos='http://cran.rstudio.com/')"
+
+USER shiny
+
+RUN R -e "webshot::install_phantomjs()"
+
+ENV PATH "/home/shiny/bin:$PATH"
