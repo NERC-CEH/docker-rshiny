@@ -1,5 +1,7 @@
 FROM rocker/shiny:4.4.0
 
+ARG PHANTOMJSVER="phantomjs-2.1.1-linux-x86_64"
+
 RUN apt-get update -y \
   && apt-get install -y --no-install-recommends \
   libcurl4-openssl-dev \
@@ -29,7 +31,22 @@ RUN apt-get update -y \
   texlive-fonts-extra \
   curl \
   lmodern \
+  libglpk-dev \
+  libxml2-dev \
   && apt-get -y autoclean
+
+# Install PhantomJS
+RUN apt-get update -y \
+  && apt-get install -y --no-install-recommends \
+  build-essential chrpath libssl-dev libxft-dev \
+  libfreetype6 libfreetype6-dev \
+  libfontconfig1 libfontconfig1-dev \
+  && apt-get -y autoclean
+
+RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/$PHANTOMJSVER.tar.bz2 \
+    && tar xvjf $PHANTOMJSVER.tar.bz2 \
+    && mv $PHANTOMJSVER /usr/local/share \
+    && ln -sf /usr/local/share/$PHANTOMJSVER/bin/phantomjs /usr/local/bin
 
 # Libraries for display
 RUN R -e "install.packages(c('devtools', 'DT', 'leaflet', 'shinythemes', 'ggplot2', 'renv', 'packrat'), repos='http://cran.rstudio.com/')"
